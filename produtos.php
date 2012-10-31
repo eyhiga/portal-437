@@ -1,6 +1,6 @@
 <?php 
 
-$page = "Listagem de Produtos";
+$_GET["page"] = "Listagem de Produtos";
 require_once "header.php";
 
 ?>

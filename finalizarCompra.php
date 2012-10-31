@@ -1,6 +1,6 @@
 <?php 
 
-$page = "Finalizar Compra";
+$_GET["page"] = "Finalizar Compra";
 require_once "header.php";
 
 ?>
