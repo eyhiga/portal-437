@@ -1,6 +1,6 @@
 <?php 
 
-$page = "Home";
+$_GET["page"] = "Home";
 require_once "header.php";
 
 ?>
