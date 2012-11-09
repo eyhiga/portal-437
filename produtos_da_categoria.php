@@ -16,8 +16,11 @@ $produtos = array();
 for($i = 1;$i < 15;$i++)
 {
 	$produto = new Produto();
-	$produto->nome = "produto1";
-	$produto->url = "http://4.bp.blogspot.com/_QNUjRg81CRM/S60suTp_4KI/AAAAAAAACeM/aTAkIQnr9JU/s1600/Debora-secco-nua-2.jpg";
+	$produto->nome = "produto ".$i;
+	//$produto->url = "http://4.bp.blogspot.com/_QNUjRg81CRM/S60suTp_4KI/AAAAAAAACeM/aTAkIQnr9JU/s1600/Debora-secco-nua-2.jpg";
+	$produto->url = "images/p1.gif";
+	$produto->preco = $i * 4 - 1;
+	$produto->id = $i; 
 	array_push($produtos,$produto);
 }
 ?>

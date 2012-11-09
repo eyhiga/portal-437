@@ -1,5 +1,3 @@
-<?php include("ruda.css") ?>
-
 <?php 
 
 class Produto

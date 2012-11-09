@@ -19,6 +19,9 @@ if (isset($_GET["page"])) {
 // Nome da pagina. Pode ser utilizado para titulo dinamico e tags meta; Tambem eh utilizado para marcacao de login
 if ($page != "Login") {
     $_SESSION["redirecionarPagina"] = UsefulMethods::curPageURL();
+} elseif ($page == "Carrinho"){
+	$url = "login.php";
+	UsefulMethods::curPageName($url);
 } else {
     return;
 }
@@ -37,10 +40,11 @@ if ($page != "Login") {
 
         <!-- INCLUINDO CSS -->
         <link type="text/css" href="css/style.css" rel="stylesheet" />
+        <link type="text/css" href="css/ruda.css" rel="stylesheet" />
+        <link type="text/css" href="css/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
         <!--[if IE 6]>
 		<link rel="stylesheet" type="text/css" href="iecss.css" />
 		<![endif]-->
-        <link type="text/css" href="css/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
         <!-- INCLUINDO JAVASCRIPTS -->
         <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="js/libraries.js"></script>
