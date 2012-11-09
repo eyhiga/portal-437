@@ -37,33 +37,33 @@ if ($page != "Login") {
 
         <!-- INCLUINDO CSS -->
         <link type="text/css" href="css/style.css" rel="stylesheet" />
+        <!--[if IE 6]>
+		<link rel="stylesheet" type="text/css" href="iecss.css" />
+		<![endif]-->
         <link type="text/css" href="css/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
         <!-- INCLUINDO JAVASCRIPTS -->
         <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="js/libraries.js"></script>
+        <script type="text/javascript" src="js/boxOver.js"></script>
         <script type="text/javascript" src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
     </head>
     <body>
     	<?php 
+    	$logado = FALSE;
     	// Usuario esta logado
         if (UsefulMethods::verificarLogin()){
             $usuario = unserialize($_SESSION["usuario"]);
-            $logado = "1";
-            ?>
-                <!-- barra de login 29px de altura-->
-                <div class="barra-login">
-                	<p>Ol&aacute;, <?php echo $usuario->nome; ?>&nbsp;|&nbsp;
-                    <a href="logout.php">Logout</a></p>
-                </div>
-            <?php 
-        // Usuario nao esta logado 
+            $logado = TRUE;
+            PageViews::menuSuperior($usuario, $logado);
+            PageViews::menuLateralEsquerda();
+			// Usuario nao esta logado
         }
 
         if (!UsefulMethods::verificarLogin()){
-        	?>
-            <div class="barra-login">
-		        <a href="login.php">Login</a>
-           	</div>
-           	<?php   
-     	}
+        	PageViews::menuSuperior($usuario, $logado);
+        	PageViews::menuLateralEsquerda();
+        }
+        
+        ?>
+        <div class="center_content">
