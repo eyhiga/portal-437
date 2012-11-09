@@ -1,3 +1,4 @@
+<?php include("ruda.php");?>
 <?php 
 
 $_GET["page"] = "Listagem de Produtos da Categoria";
@@ -9,14 +10,13 @@ require_once "header.php";
 
 $prod = $_GET["prodID"];
 
-$produtos = array(1 => "Produto 1", 2 => "Produto 2");
+$produtos = array();
 
-    foreach($produtos as $produto)
-	{
-?>
-    <p><a href="produtos.php?prodID=<?php echo $produto; ?>"><?php echo $produto; ?></a></p>
-<?php
-    }
+$produto1 = new Produto();
+$produto1->nome = "produto1";
+array_push($produtos,$produto1);
+   listar_produtos($produtos);
+   
 ?>
 <?php 
 
