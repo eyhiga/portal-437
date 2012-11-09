@@ -1,6 +1,14 @@
-	<br/><br/><br/><br/>
-	<div id="rodape">
-		<a href="atendimento.php">Atendimento ao Cliente</a>
-	</div>
-	</body>
+</div><!-- end of center content -->
+
+<?php PageViews::menuLateralDireita() ?>
+
+</div>
+<!-- end of main content -->
+
+<?php PageViews::footer() ?>
+
+</div>
+
+<!-- end of main_container -->
+</body>
 </html>
