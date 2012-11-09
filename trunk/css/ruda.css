@@ -1,0 +1,19 @@
+.pdt{
+	float:left;
+	margin-left:35px;
+	margin-bottom:40px;
+        padding:10px;
+}
+
+.pdt img{
+	height:100px;
+	width:80px;
+	display:inline;
+	float:left;
+	margin-left:0px;
+	margin-bottom:0px;
+}
+
+
+#produtos_container{
+}
