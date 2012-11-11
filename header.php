@@ -19,7 +19,7 @@ if (isset($_GET["page"])) {
 // Nome da pagina. Pode ser utilizado para titulo dinamico e tags meta; Tambem eh utilizado para marcacao de login
 if ($page != "Login") {
     $_SESSION["redirecionarPagina"] = UsefulMethods::curPageURL();
-} elseif ($page == "Carrinho"){
+} elseif ($page == "Carrinho") {
 	$url = "login.php";
 	UsefulMethods::curPageName($url);
 } else {
