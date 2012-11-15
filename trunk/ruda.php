@@ -55,7 +55,7 @@ class Produto
 		for($i = 0;$i < 10;$i++)
 		{
 			$produto = new Produto();
-			$produto->nome = "produto ".$i;
+			$produto->nome = "produto$i";
 			$produto->imagem = "http://4.bp.blogspot.com/_QNUjRg81CRM/S60suTp_4KI/AAAAAAAACeM/aTAkIQnr9JU/s1600/Debora-secco-nua-2.jpg";
 			//$produto->preco = $i * 4 - 1;
 			$produto->codigo = $i; 
@@ -63,6 +63,36 @@ class Produto
 		}
 		
 		return $produtos;
+	}
+}
+
+class Carrinho
+{
+	public static $index = "carrinho";
+	public static function getCarrinho()
+	{
+		session_start();
+		if(!isset($_SESSION[$index]))
+		{
+			$_SESSION[$index] = array();
+		}
+		
+		return $_SESSION[$index];
+	}
+	
+	public static function insertProduct($produto){
+		session_start();
+		if(!isset($_SESSION[$index]))
+		{
+			$_SESSION[$index] = array();
+		}
+		array_push($_SESSION[$index],$produto);
+		
+	}
+	
+	public static function count()
+	{
+			return count(Carrinho::getCarrinho());
 	}
 }
 ?>
