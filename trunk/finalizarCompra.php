@@ -60,7 +60,23 @@ cadastrar entrega (Grupo 09).<br/><br/><br/>
 
 <?php
 
-    
+    $link09 = $comp09;    
+    $params09 = array("id_portal" => "06",
+                      "cep_destinatario" => "13083755",
+                      "cep_remetente" => "13083755",
+                      "id_transportadora" => "1",
+                      "produtos" => array(
+                                    "01" => array(
+                                                "id_produto" => "10", 
+                                                "quantidade" => "1",
+                                                "peso" => "1",
+                                                "volume" => "1")
+                      )
+   ); 
+
+   $client9 = new nusoap_client($link09); 
+   //$client9_resp = $client9->call("cadastrarEntrega", $params09); 
+   //print_r($client9_resp);
 
 ?>
 
