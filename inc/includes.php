@@ -7,5 +7,5 @@
 require_once "Constants.class.php";
 require_once "PageViews.class.php";
 require_once "UsefulMethods.class.php";
-
+require_once "ruda.php";
 ?>
