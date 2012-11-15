@@ -1,35 +1,34 @@
-<?php include("ruda.php");?>
+<?php include "ruda.php"?>
 <link rel="stylesheet" type="text/css" href="css/ruda.css" />
 <?php 
-
 $_GET["page"] = "Listagem de Produtos da Categoria";
 require_once "header.php";
-
 ?>
 
 <?php 
 
-$prod = $_GET["prodID"];
-
-$produtos = array();
-
-for($i = 1;$i < 15;$i++)
-{
-	$produto = new Produto();
-	$produto->nome = "produto ".$i;
-	//$produto->url = "http://4.bp.blogspot.com/_QNUjRg81CRM/S60suTp_4KI/AAAAAAAACeM/aTAkIQnr9JU/s1600/Debora-secco-nua-2.jpg";
-	$produto->url = "images/p1.gif";
-	$produto->preco = $i * 4 - 1;
-	$produto->id = $i; 
-	array_push($produtos,$produto);
-}
+$categ = $_GET["categID"];
+$produtos = Produto::getListProdutoByFilter("",$categ,"","","");
 ?>
+
 <div id="produtos_container">
-	<?php listar_produtos($produtos); ?>
+	<?php 
+		foreach($produtos as $produto):
+			?>
+			<div class="pdt">
+				<div class="pdt_in">
+					<a href="produto.php?prodID=<?php echo $produto->codigo; ?>">
+						<img src="<?php echo $produto->imagem ?>" />
+					</a>
+					<div class="pdt_nome">Nome: <?php echo $produto->nome?></div>
+					<!--<div class="pdt_preco">Preco R$: <?php //echo $produto->preco; ?></div>-->
+				</div>
+			</div>
+	<?php
+		endforeach;
+	?>
 </div>
 
 <?php 
-
 require_once "footer.php";
-
 ?>

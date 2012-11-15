@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -97,7 +98,7 @@ class PageViews {
 			<div class="title_box">Categorias</div>
 			<ul class="left_menu"> 
 			<?php 
-			$categorias = array(1 => "Eletronicos", 2 => "Eletrodomesticos", 3 => "Informatica");
+			$categorias = Produto::getCategories();
 			foreach($categorias as $key=>$categoria) { 
 				$class = "even";
 				if(($key % 2) == 0) $class = "odd"; 
