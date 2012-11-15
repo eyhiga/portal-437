@@ -21,6 +21,7 @@ $produtos = Produto::getListProdutoByFilter("",$categ,"","","");
 						<img src="<?php echo $produto->imagem ?>" />
 					</a>
 					<div class="pdt_nome">Nome: <?php echo $produto->nome?></div>
+					<div><a href="adicionar_ao_carrinho.php?prodID=<?php $produto->codigo ?>">adicionar ao carrinho</a></div>
 					<!--<div class="pdt_preco">Preco R$: <?php //echo $produto->preco; ?></div>-->
 				</div>
 			</div>

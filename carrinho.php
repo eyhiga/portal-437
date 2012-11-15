@@ -2,12 +2,16 @@
 
 $_GET["page"] = "Carrinho de Compras";
 require_once "header.php";
+require_once "ruda.php";
 
 ?>
 
-Carrinho de Compras<br/>
-RUDÁ: Aqui, mostrar uma lista com todos os itens do carrinho de compras do usuário, com respectiva quantidade de cada e valor, e também valor total.
-Guardar dados na session<br/>
+<?php
+	$carrinho = Carrinho::getCarrinho();
+	foreach($carrinho as $produto):
+		echo $produto->nome;
+	endforeach;
+?>
 
 <a href="finalizarCompra.php"><input type="button" id="botaoFinalizarCompra" value="Finalizar Compra" /></a>
 

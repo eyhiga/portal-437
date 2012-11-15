@@ -119,7 +119,7 @@ class PageViews {
 				<div class="cart_title">Carrinho</div>
 		
 				<div class="cart_details">
-					3 ítens <br /> <span class="border_cart"></span> Total: <span
+					<?php echo Carrinho::count(); ?> iten(s) <br /> <span class="border_cart"></span> Total: <span
 						class="price">R$350</span>
 				</div>
 		
