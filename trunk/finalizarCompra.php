@@ -5,7 +5,7 @@ require_once "header.php";
 require_once "lib/nusoap.php";
 require_once "links.php";
 ini_set('display_errors', 1);
-ini_set('allow_url_fopen', true);
+ini_set('allow_url_fopen', 1);
 error_reporting(E_ALL);
 
 if(isset($_POST["confirmarEndereco"])){
@@ -39,15 +39,13 @@ if(isset($_POST["confirmarEndereco"])){
 	<?php
 	
 	    $link08Upd = $comp08Upd;
-	    $attr08Upd = array("code" => "10",
+	    $attr08Upd = array("code" => "1010",
 	                       "quantity" => "28");
-	    $params08Upd = array("http" => array(
-	                                    "method" => "PUT",
-	                                    "header" => "Content-type: text/xml",
-	                                    "content" => $attr08Upd));
-	    
-	    $response08Upd = file_get_contents($link08Upd, false, $params08Upd);
-	    print_r($response08Upd);
+        $attr08UpdJSON = json_encode($attr08Upd);
+        $response = \Httpful\Request::put($link08Upd)
+                    ->sendsJson()
+                    ->body($js)
+                    ->send();
 	
 	?>
 	<br/>
