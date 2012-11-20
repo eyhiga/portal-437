@@ -75,20 +75,101 @@ if(isset($_POST["confirmarEndereco"])){
 	$_SESSION["valorFrete"] = $_POST["valorFrete"];
 	$_SESSION["prazoFrete"] = $_POST["prazoFrete"];
 	$_SESSION["nomeFrete"] = $_POST["nomeFrete"];
+	
+	// Linha apenas para teste
+	$_SESSION["valorCarrinho"] = 300;
+	
+	$_SESSION["valorTotal"] = $_SESSION["valorCarrinho"] + $_SESSION["valorFrete"];
 	?>
 	<b>Escolha o meio de pagamento:</b>
 	<form name="formPagamento" action="" method="post">
 		<input type="radio" name="pagamento" value="1" checked /> Cartão de Crédito<br/>
 		<input type="radio" name="pagamento" value="2" /> Boleto Bancário<br/><br/>
 		
-		<input type="submit" name="confirmarPagamento" id="confirmarPagamento" value="Finalizar" />
+		<input type="submit" name="confirmarPagamento" id="confirmarPagamento" value="Próximo Passo" />
 	</form>
-	<?php 
-
-/* 4º passo - Verificar se cliente é bom pagador, se tem produto no estoque, dar baixa no estoque e cadastrar entrega */	
-} elseif (isset($_POST["confirmarPagamento"])) {
+	<?php
 	
-	$_SESSION["meioPagamento"] = $_POST["pagamento"];
+/* 4º passo - Verificar parcelamento, validade do cartao / emitir boleto bancario */
+} elseif (isset($_POST["confirmarPagamento"])){
+	$meioPagamento = $_SESSION["meioPagamento"] = $_POST["pagamento"];
+	
+	// Cartão de Crédito
+	if ($meioPagamento == 1) {
+		// Escolher bandeira
+		$client = new nusoap_client($comp07, true);
+		$params = array("token" => 6);
+		$pagamentos = $client->call("getPaymentBrands", $params);
+		$teste = explode('"', $pagamentos);
+		$pagamentos = array();
+		$pagamentos[0]["brand"] = $teste[1];
+		$pagamentos[0]["nome"] = $teste[3];
+		$pagamentos[1]["brand"] = $teste[5];
+		$pagamentos[1]["nome"] = $teste[7];
+		$pagamentos[2]["brand"] = $teste[9];
+		$pagamentos[2]["nome"] = $teste[11];
+		$pagamentos[3]["brand"] = $teste[13];
+		$pagamentos[3]["nome"] = $teste[15];
+		
+		?>
+		
+		<b>Escolha a bandeira do cartão:</b><br/>
+		<form name="formConfPagamento" action="" method="post" >
+			<select name="bandeira" id="bandeira" >
+				<?php foreach ($pagamentos as $pagamento) { ?>
+					<option value="<?php echo $pagamento["brand"] ?>"><?php echo $pagamento["nome"] ?></option>
+				<?php } ?>
+			</select>
+		
+			<?php 
+			// Escolher parcelamento
+			?>
+			<div id="parcelamentos"></div>
+		
+		</form>
+		<?php 
+		
+	// Boleto Bancário
+	} else {
+		// Emitir boleto bancário
+	}
+
+
+/* 5º passo - Efetuar Transação do cartão/boleto, e Verificar se cliente é bom pagador, se tem produto no estoque, dar baixa no estoque e cadastrar entrega */	
+} elseif (isset($_POST["terminoPagamento"])) {
+	
+	$numeroCartao = $_POST["numeroCartao"];
+	$nomeTitular = $_POST["nomeTitular"];
+	$cpfTitular = $_POST["cpfTitular"];
+	$codigoSeguranca = $_POST["codigoSeguranca"];
+	$dataValidade = $_POST["dataValidade"];
+	$bandeira = $_POST["bandeira"];
+	$parcelamento = $_POST["parcelamento"];
+	$parcelas = explode("|", $parcelamento);
+	
+	$client = new nusoap_client($comp07, true);
+	$params = array("token" => 6, 
+			"value" => $_SESSION["valorTotal"],
+			"brand" => $bandeira,
+			"number" => $numeroCartao,
+			"name" => $nomeTitular,
+			"cpf" => $cpfTitular,
+			"code" => $codigoSeguranca,
+			"date" => $dataValidade,
+			"installments" => $parcelas[0],
+			);
+	$result = json_decode($client->call("doTransaction", $params));
+	
+	// Houve falha no pagamento
+	if($result->success == 1) {
+		echo "Sua compra foi realizada com sucesso";
+		$transaction_id = $result->transaction_id;
+	// Deu tudo certo no pagamento
+	} else {
+		echo "Você não pode efetuar esta compra por razões de crédito";
+	}
+	exit;
+		
 	
 	/* Eduardo - Verificar se cliente é bom pagador (Grupo 04);<br/> */
 	
@@ -226,5 +307,37 @@ function buscarCep(){
     "json"
     );
 }
+
+$("#bandeira").change(function(){
+	var bandeira = $("#bandeira").val();
+	$.post("ajax/buscaParcelamento.php", 
+    {
+		bandeira: bandeira
+	},
+    function (data) {
+		// Retorno
+        if(data.parcelamento == true) {
+            //alert(data.retorno);
+            var html = data.retorno;
+            html += "<br/>Número do cartão de crédito: ";
+            html += "<input type='text' name='numeroCartao' id='numeroCartao' onkeypress='mascaraInteiro()' maxlength='16' /><br/>";
+            html += "Nome do titular: ";
+            html += "<input type='text' name='nomeTitular' id='nomeTitular' /><br/>";
+            html += "CPF do titular: ";
+            html += "<input type='text' name='cpfTitular' id='cpfTitular' onkeypress='mascaraInteiro()' maxlength='11' /><br/>";
+            html += "Código de Segurança: ";
+            html += "<input type='text' name='codigoSeguranca' id='codigoSeguranca' onkeypress='mascaraInteiro()' maxlength='3' /><br/>";
+            html += "Data de Validade: ";
+            html += "<input type='text' name='dataValidade' id='dataValidade' onkeypress='mascaraInteiro()' maxlength='6' /><br/>";
+            html += '<input type="submit" name="terminoPagamento" id="terminoPagamento" value="Finalizar" />';
+            
+            $("#parcelamentos").html(html);   
+        } else {
+        	alert("Houve um erro. Por favor, tente novamente");    
+        }
+    },
+    "json"
+    );
+});
 
 </script>
