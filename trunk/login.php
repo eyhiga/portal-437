@@ -14,6 +14,10 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
 	 * Chamar servico de autenticacao para verificar se dados de login estao corretos
 	 */
 	
+    $login = file_get_contents($comp10."?login=".$login."&senha=".$senha);     
+    $loginResponse = json_decode($login);
+    $logado = $login->response == "0";
+
 	// Se servico retornar que dados estao corretos, variavel eh setada para true
 	$logado = TRUE;
 	
@@ -35,7 +39,7 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
 	} else {
 		$url = 'login.php?err=1';
 	}
-	UsefulMethods::redirectPage($url);
+	//UsefulMethods::redirectPage($url);
 /*
  * Monta o formulario de login
  */
