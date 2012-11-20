@@ -22,7 +22,7 @@ if (isset($_GET["page"])) {
 if ($page != "Login") {
     $_SESSION["redirecionarPagina"] = UsefulMethods::curPageURL();
 } 
-if ((($page == "Carrinho") || ($page == "Finalizar Compra")) && (!UsefulMethods::verificarLogin())) {
+if ((($page == "Carrinho") || ($page == "Finalizar Compra") || ($page == "Atendimento")) && (!UsefulMethods::verificarLogin())) {
 	$url = "login.php";
 	UsefulMethods::redirectPage($url);
 } 
