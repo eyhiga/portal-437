@@ -22,8 +22,8 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
 		 * Chamar servico de clientes para pegar todos os dados do cliente, e setar os atributos aqui antes de serializar na sessao
 		 */
 		$usuario->nome = "Teste Nome";
-		$usuario->cep = "13083-852";
-		$usuario->estado = "São Paulo";
+		$usuario->cep = "13083852";
+		$usuario->estado = "SP";
 		$usuario->cidade = "Campinas";
 		$usuario->bairro = "Cidade Universitária";
 		$usuario->tipo = "Avenida";

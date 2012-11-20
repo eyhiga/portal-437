@@ -4,6 +4,8 @@
 ini_set("display_errors", 1);
 error_reporting(E_ERROR);
 
+$cepRemetente = "30330240";
+
 //Incluindo arquivos
 date_default_timezone_set('America/Sao_Paulo');
 require_once "inc/includes.php";
@@ -19,12 +21,11 @@ if (isset($_GET["page"])) {
 // Nome da pagina. Pode ser utilizado para titulo dinamico e tags meta; Tambem eh utilizado para marcacao de login
 if ($page != "Login") {
     $_SESSION["redirecionarPagina"] = UsefulMethods::curPageURL();
-} elseif ($page == "Carrinho") {
+} 
+if ((($page == "Carrinho") || ($page == "Finalizar Compra")) && (!UsefulMethods::verificarLogin())) {
 	$url = "login.php";
-	UsefulMethods::curPageName($url);
-} else {
-    return;
-}
+	UsefulMethods::redirectPage($url);
+} 
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
