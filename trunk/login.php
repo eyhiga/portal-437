@@ -25,8 +25,21 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
 		/*
 		 * Chamar servico de clientes para pegar todos os dados do cliente, e setar os atributos aqui antes de serializar na sessao
 		 */
-		$usuario->nome = "Teste Nome";
-		$usuario->cep = "13083852";
+        $clientes_info_json = file_get_contents($comp01.$login.".json");
+        $clientes_info - json_decode($clientes_info_json);
+
+        $usuario->cpf = $clientes_info->cpf;
+        $usuario->nome = $clientes_info->nome;
+        $usuario->cep = $clientes_info->cep;
+        
+        $clientes_cep_json = file_get_contents($comp01cep.$login.".json");
+        $clientes_cep = json_decode($clientes_cep_json);    
+
+        $usuario->numero = $clientes_cep->numero;
+
+        //$usuario->cpf = "";
+		//$usuario->nome = "Teste Nome";
+		//$usuario->cep = "13083852";
 		$usuario->estado = "SP";
 		$usuario->cidade = "Campinas";
 		$usuario->bairro = "Cidade Universitária";
