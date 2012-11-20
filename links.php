@@ -1,4 +1,7 @@
 <?php 
+    // Clientes
+    $comp01 = "http://mc437.herokuapp.com/tudo/";
+    $comp01cep = "http://mc437.herokuapp.com/cep/";
 	/* Busca de endereço por CEP */
 	// https://docs.google.com/spreadsheet/ccc?key=0AnXiYPrlU4dtdGhKTXA3Z3NuOGlrWGt3dzM1TDIwWFE#gid=0
 	// http://g2mc437.heliohost.org/parte2/service/teste-cep.php
