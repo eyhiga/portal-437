@@ -69,24 +69,27 @@ class Produto
 class Carrinho
 {
 	public static $index = "carrinho";
+	
 	public static function getCarrinho()
 	{
-		session_start();
-		if(!isset($_SESSION[$index]))
+		if(!isset($_SESSION)){ 
+			session_start();
+		}
+		if(!isset($_SESSION[self::$index]))
 		{
-			$_SESSION[$index] = array();
+			$_SESSION[self::$index] = array();
 		}
 		
-		return $_SESSION[$index];
+		return $_SESSION[self::$index];
 	}
 	
 	public static function insertProduct($produto){
 		session_start();
-		if(!isset($_SESSION[$index]))
+		if(!isset($_SESSION[self::$index]))
 		{
-			$_SESSION[$index] = array();
+			$_SESSION[self::$index] = array();
 		}
-		array_push($_SESSION[$index],$produto);
+		array_push($_SESSION[self::$index],$produto);
 		
 	}
 	

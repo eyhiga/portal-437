@@ -9,7 +9,7 @@
 class PageViews {
 
 	// Menu Superior
-	public function menuSuperior($usuario, $logado) {
+	public static function menuSuperior($usuario, $logado) {
 		?>
 <div id="main_container">
 	<div class="top_bar">
@@ -92,7 +92,7 @@ class PageViews {
 	} 
 	
 	// Menu Lateral Esquerda
-	public function menuLateralEsquerda() {
+	public static function menuLateralEsquerda() {
 		?>
 		<div class="left_content">
 			<div class="title_box">Categorias</div>
@@ -112,7 +112,7 @@ class PageViews {
 	} 
 	
 	// Menu Lateral Direita
-	public function menuLateralDireita() {
+	public static function menuLateralDireita() {
 		?>
 		<div class="right_content">
 			<div class="shopping_cart">
@@ -137,7 +137,7 @@ class PageViews {
 	} 
 	
 	// Menu Lateral Direita
-	public function footer() {
+	public static function footer() {
 	?>
 		<div class="footer">
 			<div class="left_footer">
