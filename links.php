@@ -4,15 +4,19 @@
 	// http://g2mc437.heliohost.org/parte2/service/teste-cep.php
 	$comp02 = "http://g2mc437.heliohost.org/parte2/service/webserver.php/g02_busca_por_cep?wsdl";
 	
-	//
+	// Retorna a situacao de credito
     $comp04 = "http://staff01.lab.ic.unicamp.br:8480/ModuloValidacaoCreditoWS/services/ValidacaoCreditoService?wsdl";
     
-    //
+    // Verifica a quantidade de produtos no estoque
     $comp08Qtd = "http://g6:g6@mc437-g8-estoque-v2.webbyapp.com/products/currentQuantity/";
     
-    //
+    // Altera quantidade de produtos no estoque
     $comp08Upd = "http://g6:g6@mc437-g8-estoque-v2.webbyapp.com/products/quantity/";
     
     // Escolha de Frete
     $comp09 = "http://staff01.lab.ic.unicamp.br/grupo9/webservice/ws.php?wsdl";
+
+    // Login
+    $comp10 = "http://staff03.lab.ic.unicamp.br:8888/authentications/loga.json";
+
 ?>
