@@ -2,6 +2,7 @@
 
 $_GET['page'] = 'Login';
 require_once 'header.php';
+require_once 'links.php';
 
 /*
  * Formulario de login foi enviado
@@ -14,19 +15,21 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
 	 * Chamar servico de autenticacao para verificar se dados de login estao corretos
 	 */
 	
-    $login = file_get_contents($comp10."?login=".$login."&senha=".$senha);     
-    $loginResponse = json_decode($login);
-    $logado = $login->response == "0";
-
+    $login_json = file_get_contents($comp10."?login=".$login."&senha=".$senha);     
+    $loginResponse = json_decode($login_json);
+    $logado = $loginResponse->response == "0";
 	// Se servico retornar que dados estao corretos, variavel eh setada para true
-	$logado = TRUE;
+	//$logado = TRUE;
 	
 	if ($logado) {
 		/*
 		 * Chamar servico de clientes para pegar todos os dados do cliente, e setar os atributos aqui antes de serializar na sessao
 		 */
+        //echo $comp01.$login.".json";  
         $clientes_info_json = file_get_contents($comp01.$login.".json");
-        $clientes_info - json_decode($clientes_info_json);
+        //print_r($clientes_info_json);
+        $clientes_info = json_decode($clientes_info_json);
+        //print_r($clientes_info);
 
         $usuario->cpf = $clientes_info->cpf;
         $usuario->nome = $clientes_info->nome;
