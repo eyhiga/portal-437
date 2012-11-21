@@ -3,6 +3,7 @@
 $_GET['page'] = 'Login';
 require_once 'header.php';
 require_once 'links.php';
+require_once 'lib/nusoap.php';
 
 /*
  * Formulario de login foi enviado
@@ -39,23 +40,36 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
         $clientes_cep = json_decode($clientes_cep_json);    
 
         $usuario->numero = $clientes_cep->numero;
+        
+        $client = new nusoap_client($comp02, true);
+        $params = array($clientes_info->cep);
+        $result = $client->call("g02_busca_por_cep", $params);
+
+        if ($result["erro"] == 0) {
+            $usuario->estado = utf8_encode($result["uf"]);
+            $usuario->cidade = utf8_encode($result["cidade"]);
+            $usuario->bairro = utf8_encode($result["bairro"]);
+            $usuario->tipo = utf8_encode($result["tipo"]);
+            $usuario->endereco = utf8_encode($result["logradouro"]);
+        }
 
         //$usuario->cpf = "";
-		//$usuario->nome = "Teste Nome";
+        //$usuario->nome = "Teste Nome";
 		//$usuario->cep = "13083852";
-		$usuario->estado = "SP";
-		$usuario->cidade = "Campinas";
-		$usuario->bairro = "Cidade Universitária";
-		$usuario->tipo = "Avenida";
-		$usuario->endereco = "Albert Einstein";
-		$usuario->numero = "350";
-		
+		//$usuario->estado = "SP";
+		//$usuario->cidade = "Campinas";
+		//$usuario->bairro = "Cidade Universitária";
+		//$usuario->tipo = "Avenida";
+		//$usuario->endereco = "Albert Einstein";
+		//$usuario->numero = "350";
+
+
 		$_SESSION["usuario"] = serialize($usuario);
 		$url = $_SESSION["redirecionarPagina"];
 	} else {
 		$url = 'login.php?err=1';
 	}
-	//UsefulMethods::redirectPage($url);
+	UsefulMethods::redirectPage($url);
 /*
  * Monta o formulario de login
  */
