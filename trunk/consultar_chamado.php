@@ -4,7 +4,9 @@ $_GET["page"] = "Consultar chamado";
 require_once "header.php";
 require_once "lib/nusoap.php";
 
-$cpf = $_POST["cpf"];
+$usuario = unserialize($_SESSION["usuario"]);
+
+$cpf = $usuario->cpf;
 $grupo = "06";
 
 // Cria um cliente SOAP
@@ -37,10 +39,17 @@ else {
         {
             $codigosAcompanhamento = $result["CodigoAcompanhamento"];
             $codigosAcompanhamento = explode("|", $codigosAcompanhamento);
+            echo "<table>";
+            echo "  <tr><td>Codigo de acompanhamento<td><tr>";
             foreach ($codigosAcompanhamento as $codigoAcompanhamento) 
             {
-                echo "<br/>Codigo: ".$codigoAcompanhamento;
+                echo "<tr>";
+                echo "  <td>";
+                echo "      <a href=\"responder_chamado.php?cod=".$codigoAcompanhamento."\">".$codigoAcompanhamento."</a>";
+                echo "  </td>";
+                echo "</tr>";
             }
+            echo "</table>";
         }
         // Se houve erro, mostro o codigo do erro
         else
@@ -52,7 +61,6 @@ else {
 
 ?>
 
-Consultar chamado
 
 <?php
 
