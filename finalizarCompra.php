@@ -25,6 +25,7 @@ if(isset($_POST["confirmarEndereco"])){
 	$result = $client->call("UC003", $params); */
 	
 	// Busca o valor do frete e prazo de entrega de cada tipo de transportadora
+	// TODO
 	$produtos = array(
 			         "1" => array(
                            	"id_produto" => "10", 
@@ -95,9 +96,6 @@ if(isset($_POST["confirmarEndereco"])){
 	$_SESSION["prazoFrete"] = $_POST["prazoFrete"];
 	$_SESSION["nomeFrete"] = $_POST["nomeFrete"];
 	
-	// Linha apenas para teste
-	//$_SESSION["valorCarrinho"] = 20000;
-	
 	$_SESSION["valorTotal"] = $_SESSION["valorCarrinho"] + $_SESSION["valorFrete"];
 	
 	$cartao = TRUE;
@@ -106,7 +104,6 @@ if(isset($_POST["confirmarEndereco"])){
 	if($usuario->score == "C" && $_SESSION["valorTotal"] > 10000) $cartao = FALSE;
 	if($usuario->score == "D" && $_SESSION["valorTotal"] > 5000) $cartao = FALSE;
 	if($usuario->score == "X") $cartao = FALSE;
-	
 	
 	?>
 	<b>Escolha o meio de pagamento:</b>
@@ -214,7 +211,14 @@ if(isset($_POST["confirmarEndereco"])){
 	}
 	
 	// Cadastro de entrega
+	// TODO
 	$link09 = $comp09;
+	$produtosServico = array();
+	foreach($_SESSION['carrinho_lista'] as $index => $item) {
+		$novo = array();
+		$novo["id_produto"] = $item["id"];
+		array_push($produtosServico, $novo);
+	}
 	$params09 = array("id_portal" => "06",
 			"cep_destinatario" => $_SESSION["cepEntrega"],
 			"cep_remetente" => $cepRemetente,
@@ -232,24 +236,19 @@ if(isset($_POST["confirmarEndereco"])){
 	$client9_resp = $client9->call("cadastrarEntrega", $params09);
 	$_SESSION["id_entrega_cadastrada"] = $client9_resp;
 	
-
 	// Baixa no estoque
 	$link08Upd = $comp08Upd;
-	$attr08Upd = array("code" => "1010",
-			"quantity" => "28");
-	$attr08UpdJSON = json_encode($attr08Upd);
-	$response = \Httpful\Request::put($link08Upd)
-	->sendsJson()
-	->body($js)
-	->send();
-
-	// Verificar se tem produto no estoque
-    /* $link8Qtd = $comp08Qtd."10".".json";
-    $ret8Qtd = file_get_contents($link8Qtd);
-    $qts8 = json_decode($ret8);
-    //echo $qts8->product->quantity; */
+	foreach($_SESSION['carrinho_lista'] as $index => $item) {
+		$attr08Upd = array("code" => $item["id"],
+			"quantity" => $item["qtd"]);
+		$attr08UpdJSON = json_encode($attr08Upd);
+		$response = \Httpful\Request::put($link08Upd)
+		->sendsJson()
+		->body($js)
+		->send();
+	}
 	
-   
+
 /* 1º passo - Escolha de endereço de entrega */
 } else {
 ?>
