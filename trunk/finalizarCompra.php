@@ -152,7 +152,7 @@ if(isset($_POST["confirmarEndereco"])){
 	} else {
 		// Emitir boleto bancário
 		$client = new nusoap_client($comp03, true);
-		$err = $this->client->getError();
+		$err = $client->getError();
 		var_dump($err);
 		exit;
 		$params = array("cnpj_contrato_convenio" => $cnpj, "token" => $token, "cliente" => $usuario->nome, "valor" => $_SESSION["valorTotal"]);
