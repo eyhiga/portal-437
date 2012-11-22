@@ -28,7 +28,18 @@ $produtos = $client->call("getListProdutoByFilter", $params);
 						<img src="<?php echo $produto["imagem"]; ?>" />
 					</a>
 					<div class="pdt_nome">Nome: <?php echo utf8_encode($produto["nome"]);?></div>
+                    <?php
+                        $client_preco = file_get_contents($comp08Preco.$produto["codigo"].".json");
+                        $preco = json_decode($client_preco);
+                        
+                        $client_disp = file_get_contents($comp08Qtd.$produto["codigo"].".json");
+                        $disp = json_decode($client_disp);
+                    ?>
+                    <div>R$ <?php echo $preco->product->price;?></div>
+                    <div>Disponiveis: <?php echo $disp->product->quantity;?> </div>
+                    <?php if($disp->product->quantity > 0) {?>
 					<div><a href="adicionar_ao_carrinho.php?prodID=<?php echo $produto["codigo"]; ?>">adicionar ao carrinho</a></div>
+                    <?php }?>
 					<!--<div class="pdt_preco">Preco R$: <?php //echo $produto->preco; ?></div>-->
 				</div>
 			</div>

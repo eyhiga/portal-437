@@ -31,7 +31,10 @@
     
     // Altera quantidade de produtos no estoque
     $comp08Upd = "http://g6:g6@mc437-g8-estoque-v2.webbyapp.com/products/quantity/";
-    
+
+    // Obtem preco de um produto
+    $comp08Preco = "http://g6:g6@mc437-g8-estoque-v2.webbyapp.com/products/currentPrice/";    
+
     // Escolha de Frete
     $comp09 = "http://staff01.lab.ic.unicamp.br/grupo9/webservice/ws.php?wsdl";
     //$comp09 = "localhost:9090/grupo9/webservice/ws.php?wsdl";
