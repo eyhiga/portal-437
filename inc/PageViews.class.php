@@ -121,7 +121,7 @@ class PageViews {
 				<div class="cart_title">Carrinho</div>
 		
 				<div class="cart_details">
-					<?php echo $_SESSION["quantidadeProdutos"] ?> iten(s) <br /> <span class="border_cart"></span> Total: <span
+					<?php if($_SESSION["quantidadeProdutos"]){ echo $_SESSION["quantidadeProdutos"]; } else { echo "0"; } ?> iten(s) <br /> <span class="border_cart"></span> Total: <span
 						class="price">R$<?php echo number_format($_SESSION["valorCarrinho"], 2, ",", "")?></span>
 				</div>
 		
