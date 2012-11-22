@@ -257,6 +257,10 @@ if(isset($_POST["confirmarEndereco"])){
 		->send();
 	}
 	
+	unset($_SESSION["carrinho_lista"]);
+	unset($_SESSION["quantidadeProdutos"]);
+	unset($_SESSION["valorCarrinho"]);
+	
 	echo "Sua compra foi realizada com sucesso";
 	?>
 	<img src="images/ok.gif" />
