@@ -39,7 +39,7 @@ if(isset($_POST["confirmarEndereco"])){
 	
 	// Transporte 1
 	$client = new nusoap_client($comp09, true);
-	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 1, "produtos" => $produtos);
+	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 2, "produtos" => $produtos);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
 	echo "<br/>transporte 1: ";
 	var_dump($freteService);
