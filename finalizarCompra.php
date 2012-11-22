@@ -154,7 +154,7 @@ if(isset($_POST["confirmarEndereco"])){
 		$client = new nusoap_client($comp03, true);
 		$params = array("cnpj_contrato_convenio" => $cnpj, "token" => $token, "cliente" => $usuario->nome, "valor" => $_SESSION["valorTotal"]);
 		$boleto = $client->call("emitir_boleto", $params);
-		var_dump($boleto);
+		var_dump($client);
 	}
 
 
