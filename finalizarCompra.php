@@ -96,7 +96,7 @@ if(isset($_POST["confirmarEndereco"])){
 	$_SESSION["nomeFrete"] = $_POST["nomeFrete"];
 	
 	// Linha apenas para teste
-	$_SESSION["valorCarrinho"] = 300;
+	$_SESSION["valorCarrinho"] = 20000;
 	
 	$_SESSION["valorTotal"] = $_SESSION["valorCarrinho"] + $_SESSION["valorFrete"];
 	
