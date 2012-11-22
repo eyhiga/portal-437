@@ -22,9 +22,11 @@ require_once "header.php";
 	$params = array("codigo" => $idProduto);
 	$descricao = $client->call("getProdutoByCodigo", $params);
 	
-	/* $client = new nusoap_client($comp05, true);
-	$params = array("codigo" => $idProduto);
-	$estoque = $client->call("getProdutoByCodigo", $params); */
+	$client_preco = file_get_contents($comp08Preco.$produto["codigo"].".json");
+    $preco = json_decode($client_preco);
+                        
+    $client_disp = file_get_contents($comp08Qtd.$produto["codigo"].".json");
+    $disp = json_decode($client_disp);
 	
 ?>
 <div style="float:left">
@@ -37,13 +39,17 @@ require_once "header.php";
 		<br/><b>Fabricante:</b> <?php echo utf8_encode($descricao["return"]["fabricante"]) ?>
 		<br/><b>Peso:</b> <?php echo $descricao["return"]["peso"] ?>
 		<br/><b>Largura:</b> <?php echo $descricao["return"]["largura"] ?>
-		<br/><b>Preço:</b> <?php echo 0 ?>
-		<br/><b>Qtde Estoque:</b> <?php echo 0 ?>
+		<br/><b>Preço:</b> <?php echo $preco->product->price ?>
+		<br/><b>Qtde Estoque:</b> <?php echo $disp->product->quantity ?>
 	</div>
 	
 	<img id="imagem" src="<?php echo $descricao["return"]["imagem"] ?>" />
-	
-	<input type="button" id="btnAddCarrinho" value="Adicionar ao carrinho" onclick="adicionarCarrinho(<?php echo $idProduto ?>)" />
+	<form action="adicionar_ao_carrinho.php" method="post">
+		<input type="hidden" name="nome" value="<?php echo utf8_encode($descricao["return"]["nome"]) ?>" />
+		<input type="hidden" name="id" value="<?php echo $idProduto ?>" />
+		<input type="hidden" name="preco" value="<?php echo $preco ?>" />
+		<input type="submit" id="btnAddCarrinho" value="Adicionar ao carrinho" />
+	</form>
 	
 </div>	
 
