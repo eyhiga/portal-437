@@ -91,15 +91,15 @@ class PageViews {
 	} 
 	
 	// Menu Lateral Esquerda
-	public static function menuLateralEsquerda() {
+	public static function menuLateralEsquerda($categorias) {
 		?>
 		<div class="left_content">
 			<div class="title_box">Categorias</div>
 			<ul class="left_menu"> 
 			<?php 
-			$categorias = Produto::getCategories();
-			var_dump($categorias);
-			foreach($categorias as $key=>$categoria) { 
+			//$categorias = Produto::getCategories();
+			print_r($categorias);
+			foreach($categorias as $categoria) { 
 				$class = "even";
 				if(($key % 2) == 0) $class = "odd"; 
 				?>

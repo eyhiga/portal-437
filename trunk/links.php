@@ -17,8 +17,8 @@
     $comp04 = "http://staff01.lab.ic.unicamp.br:8480/ModuloValidacaoCreditoWS/services/ValidacaoCreditoService?wsdl";
 	//$comp04 = "localhost:8480/ModuloValidacaoCreditoWS/services/ValidacaoCreditoService?wsdl";
 
-    //$comp05 = "http://staff01.lab.ic.unicamp.br:8080/ProdUNICAMPServices/services/Servicos?wsdl";
-	$comp05 = "localhost:8080/ProdUNICAMPServices/services/Servicos?wsdl";
+    $comp05 = "http://staff01.lab.ic.unicamp.br:8080/ProdUNICAMPServices/services/Servicos?wsdl";
+	//$comp05 = "localhost:8080/ProdUNICAMPServices/services/Servicos?wsdl";
     /* Cartão de Crédito */
     // http://www.chainreactor.net/services/help.pdf
     // https://docs.google.com/file/d/0B9Ddz98_HYxPaDJ4a3lBQmt0SDQ/edit
