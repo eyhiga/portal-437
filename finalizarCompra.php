@@ -45,11 +45,10 @@ if(isset($_POST["confirmarEndereco"])){
 	var_dump($freteService);
 	$frete[0]["valor"] = $freteService["frete"];
 	$frete[0]["prazo"] = $freteService["prazo"];
-	sleep(5);
 
 	// Transporte 2
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 2, "produtos" => $produtos);
-	$frete = $client->call("calculaFreteEPrazo", $params);
+	$freteService = $client->call("calculaFreteEPrazo", $params);
 	echo "<br/>transporte 2: ";
 	var_dump($freteService);
 	$frete[1]["valor"] = $freteService["frete"];
@@ -58,7 +57,7 @@ if(isset($_POST["confirmarEndereco"])){
 	
 	// Transporte 3
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 3, "produtos" => $produtos);
-	$frete = $client->call("calculaFreteEPrazo", $params);
+	$freteService = $client->call("calculaFreteEPrazo", $params);
 	echo "<br/>transporte 3: ";
 	var_dump($freteService);
 	$frete[2]["valor"] = $freteService["frete"];
@@ -66,7 +65,7 @@ if(isset($_POST["confirmarEndereco"])){
 	
 	// Transporte 4
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 4, "produtos" => $produtos);
-	$frete = $client->call("calculaFreteEPrazo", $params);
+	$freteService = $client->call("calculaFreteEPrazo", $params);
 	echo "<br/>transporte 4: ";
 	var_dump($freteService);
 	$frete[3]["valor"] = $freteService["frete"];
