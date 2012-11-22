@@ -99,6 +99,7 @@ class PageViews {
 			<ul class="left_menu"> 
 			<?php 
 			$categorias = Produto::getCategories();
+			var_dump($categorias);
 			foreach($categorias as $key=>$categoria) { 
 				$class = "even";
 				if(($key % 2) == 0) $class = "odd"; 
