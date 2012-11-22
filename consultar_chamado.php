@@ -45,7 +45,7 @@ else {
             {
                 echo "<tr>";
                 echo "  <td>";
-                echo "      <a href=\"responder_chamado.php?cod=".$codigoAcompanhamento."\">".$codigoAcompanhamento."</a>";
+                echo "      <a href=\"detalhe_chamado.php?cod=".$codigoAcompanhamento."\">".$codigoAcompanhamento."</a>";
                 echo "  </td>";
                 echo "</tr>";
             }
