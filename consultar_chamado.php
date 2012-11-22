@@ -54,7 +54,14 @@ else {
         // Se houve erro, mostro o codigo do erro
         else
         {
-            echo "Erro: ".$result["Erro"];
+            if($result["Erro"] == "503")
+            {
+                echo "Nao ha chamados abertos<br/>";
+            }
+            else
+            {
+                echo "Erro: ".$result["Erro"];
+            }
         }
     }
 }
