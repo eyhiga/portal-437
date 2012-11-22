@@ -22,10 +22,10 @@ require_once "header.php";
 	$params = array("codigo" => $idProduto);
 	$descricao = $client->call("getProdutoByCodigo", $params);
 	
-	$client_preco = file_get_contents($comp08Preco.$produto["codigo"].".json");
+	$client_preco = file_get_contents($comp08Preco.$idProduto.".json");
     $preco = json_decode($client_preco);
                         
-    $client_disp = file_get_contents($comp08Qtd.$produto["codigo"].".json");
+    $client_disp = file_get_contents($comp08Qtd.$idProduto.".json");
     $disp = json_decode($client_disp);
 	
 ?>
