@@ -16,7 +16,14 @@ require_once "header.php";
 </style>
 
 <?php
-	$produto = Produto::getProdutoByCodigo($_GET["prodID"]);
+	$idProduto = $_GET["prodID"];
+	
+	$client = new nusoap_client($comp05, true);
+	$params = array("codigo" => $idProduto);
+	$descricao = $client->call("getProdutoByCodigo", $params);
+	
+	var_dump($descricao);
+	
 ?>
 <div style="float:left">
 	<div style="float:left;width:40%">
