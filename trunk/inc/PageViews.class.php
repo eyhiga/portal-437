@@ -69,8 +69,8 @@ class PageViews {
 				<li class="divider"></li>
 				<li><a href="minhas_compras.php" class="nav2">Minhas compras</a></li>
 				<li class="divider"></li>
-				<li><a href="categorias.php" class="nav3">Categorias</a></li>
-				<li class="divider"></li>
+				<!--<li><a href="categorias.php" class="nav3">Categorias</a></li>
+				<li class="divider"></li>-->
 				<li><a href="atendimento.php" class="nav6">Atendimento</a></li>
 				<li class="divider"></li>
 				<li class="currencies">Moeda<select>
@@ -98,12 +98,14 @@ class PageViews {
 			<ul class="left_menu"> 
 			<?php 
 			//$categorias = Produto::getCategories();
-			print_r($categorias);
-			foreach($categorias as $categoria) { 
+			//print_r($categorias["return"]);
+            $key = 0;
+			foreach($categorias["return"] as $categoria) { 
 				$class = "even";
 				if(($key % 2) == 0) $class = "odd"; 
+                $key = $key + 1;
 				?>
-				<li class="<?php echo $class ?>"><a href="produtos_da_categoria.php?categID=<?php echo $categoria; ?>"><?php echo $categoria; ?></a></li>
+				<li class="<?php echo $class ?>"><a href="produtos_da_categoria.php?categID=<?php echo $categoria["nome"]; ?>"><?php echo $categoria["nome"]; ?></a></li>
 			<?php } ?>
 			</ul>
 		</div>
