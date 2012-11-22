@@ -245,6 +245,20 @@ if(isset($_POST["confirmarEndereco"])){
 	$_SESSION["id_entrega_cadastrada"] = $client9_resp;
 	
 	// Baixa no estoque
+	
+	
+	$link08Upd = $comp08Upd;
+	$attr08Upd = array("code" => "1010",
+			"quantity" => "28");
+	$attr08UpdJSON = json_encode($attr08Upd);
+	$response = \Httpful\Request::put($link08Upd)
+	->sendsJson()
+	->body($js)
+	->send();
+	exit;
+	
+	
+	
 	$link08Upd = $comp08Upd;
 	foreach($_SESSION['carrinho_lista'] as $index => $item) {
 		$attr08Upd = array("code" => $item["id"],
