@@ -53,41 +53,48 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
             $usuario->endereco = utf8_encode($result["logradouro"]);
         }
 
-        //$usuario->cpf = "";
-        //$usuario->nome = "Teste Nome";
-		//$usuario->cep = "13083852";
-		//$usuario->estado = "SP";
-		//$usuario->cidade = "Campinas";
-		//$usuario->bairro = "Cidade Universitária";
-		//$usuario->tipo = "Avenida";
-		//$usuario->endereco = "Albert Einstein";
-		//$usuario->numero = "350";
+        $args4 = array("cpf" => $clientes_info->cpf,
+                        "token" => "0123456789");
+        $client4 = new nusoap_client($comp04, true);
+        $client4_resp = $client4->call("getScore", $args4);
+        $score = $client4_resp["return"]["score"]; 
+        $usuario->score = $score;
+
+            //$usuario->cpf = "";
+            //$usuario->nome = "Teste Nome";
+            //$usuario->cep = "13083852";
+            //$usuario->estado = "SP";
+            //$usuario->cidade = "Campinas";
+            //$usuario->bairro = "Cidade Universitária";
+            //$usuario->tipo = "Avenida";
+            //$usuario->endereco = "Albert Einstein";
+            //$usuario->numero = "350";
 
 
-		$_SESSION["usuario"] = serialize($usuario);
-		$url = $_SESSION["redirecionarPagina"];
-	} else {
-		$url = 'login.php?err=1';
-	}
-	UsefulMethods::redirectPage($url);
-/*
- * Monta o formulario de login
- */
+            $_SESSION["usuario"] = serialize($usuario);
+        $url = $_SESSION["redirecionarPagina"];
+    } else {
+        $url = 'login.php?err=1';
+    }
+    UsefulMethods::redirectPage($url);
+    /*
+     * Monta o formulario de login
+     */
 } else {
-	if (isset($_GET['err'])) {
-		if ($_GET['err'] == 1) {
-			?> <span>Seu login e/ou senha estão incorretos</span> <?php
-			}
-		}
-		?>
-		<form id="formLogin" method="post" action="login.php">
-			Login: <input type="text" id="formLoginLogin" name="formLoginLogin" maxlength="100" /><br/>
-			Senha: <input type="password" id="formLoginSenha" name="formLoginSenha" maxlength="30" />
-			
-			<input type="submit" value="Entrar" />
-		</form>
-<?php } 
+    if (isset($_GET['err'])) {
+        if ($_GET['err'] == 1) {
+            ?> <span>Seu login e/ou senha estão incorretos</span> <?php
+        }
+    }
+    ?>
+        <form id="formLogin" method="post" action="login.php">
+        Login: <input type="text" id="formLoginLogin" name="formLoginLogin" maxlength="100" /><br/>
+        Senha: <input type="password" id="formLoginSenha" name="formLoginSenha" maxlength="30" />
 
-require_once 'footer.php';
+        <input type="submit" value="Entrar" />
+        </form>
+        <?php } 
 
-?>
+        require_once 'footer.php';
+
+        ?>
