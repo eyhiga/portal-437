@@ -26,38 +26,49 @@ if(isset($_POST["confirmarEndereco"])){
 	
 	// Busca o valor do frete e prazo de entrega de cada tipo de transportadora
 	// TODO
-	$produtos = array(
+	/* $produtos = array(
 			         "1" => array(
                            	"id_produto" => "10", 
                             "quantidade" => "1",
                             "peso" => "1.9",
                             "volume" => "2.3"
 			         		)
-                      );
+                      ); */
+	
+	$produtosServico = array();
+	
+	foreach($_SESSION['carrinho_lista'] as $index => $item) {
+		$novo = array();
+		$novo["id_produto"] = $item["id"];
+		$novo["quantidade"] = $item["qtd"];
+		$novo["peso"] = $item["peso"];
+		$novo["volume"] = $item["volume"];
+		array_push($produtosServico, $novo);
+	}
 	
 	$frete = array();
 	
 	// Transporte 1
 	$client = new nusoap_client($comp09, true);
-	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 1, "produtos" => $produtos);
+	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 1, "produtos" => $produtosServico);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
 	$frete[0]["valor"] = $freteService["frete"];
 	$frete[0]["prazo"] = $freteService["prazo"];
 
 	// Transporte 2
-	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 2, "produtos" => $produtos);
+	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 2, "produtos" => $produtosServico);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
 	$frete[1]["valor"] = $freteService["frete"];
 	$frete[1]["prazo"] = $freteService["prazo"];
 	
 	// Transporte 3
-	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 3, "produtos" => $produtos);
+	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 3, "produtos" => $produtosServico);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
 	$frete[2]["valor"] = $freteService["frete"];
 	$frete[2]["prazo"] = $freteService["prazo"];
 	
 	// Transporte 4
-	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 4, "produtos" => $produtos);
+	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 4, "produtos" => $produtosServico);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
 	$frete[3]["valor"] = $freteService["frete"];
 	$frete[3]["prazo"] = $freteService["prazo"];
@@ -217,19 +228,17 @@ if(isset($_POST["confirmarEndereco"])){
 	foreach($_SESSION['carrinho_lista'] as $index => $item) {
 		$novo = array();
 		$novo["id_produto"] = $item["id"];
+		$novo["quantidade"] = $item["qtd"];
+		$novo["peso"] = $item["peso"];
+		$novo["volume"] = $item["volume"];
 		array_push($produtosServico, $novo);
 	}
+	
 	$params09 = array("id_portal" => "06",
 			"cep_destinatario" => $_SESSION["cepEntrega"],
 			"cep_remetente" => $cepRemetente,
 			"id_transportadora" => $_SESSION["tipoFrete"],
-			"produtos" => array(
-					"01" => array(
-							"id_produto" => "10",
-							"quantidade" => "1",
-							"peso" => "1",
-							"volume" => "1")
-			)
+			"produtos" => $produtosServico
 	);
 	
 	$client9 = new nusoap_client($link09);
