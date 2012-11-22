@@ -1,6 +1,6 @@
 <?php 
 
-$_GET["page"] = "Carrinho de Compras";
+$_GET["page"] = "Carrinho";
 require_once "header.php";
 require_once "ruda.php";
 
