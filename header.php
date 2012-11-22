@@ -11,6 +11,8 @@ $token = "bf51e510909448cff434044f3d68a1dc";
 //Incluindo arquivos
 date_default_timezone_set('America/Sao_Paulo');
 require_once "inc/includes.php";
+require_once "links.php";
+require_once "lib/nusoap.php";
 //Seta a session
 UsefulMethods::sessionStart();
 
@@ -58,18 +60,20 @@ if ((($page == "Carrinho") || ($page == "Minhas compras") || ($page == "Finaliza
     <body>
     	<?php 
     	$logado = FALSE;
+        $client = new nusoap_client($comp05, true);
+        $categorias = $client->call("getListCategoria");
     	// Usuario esta logado
         if (UsefulMethods::verificarLogin()){
             $usuario = unserialize($_SESSION["usuario"]);
             $logado = TRUE;
             PageViews::menuSuperior($usuario, $logado);
-            PageViews::menuLateralEsquerda();
+            PageViews::menuLateralEsquerda($categorias);
 			// Usuario nao esta logado
         }
 
         if (!UsefulMethods::verificarLogin()){
         	PageViews::menuSuperior($usuario, $logado);
-        	PageViews::menuLateralEsquerda();
+        	PageViews::menuLateralEsquerda($categorias);
         }
         
         ?>
