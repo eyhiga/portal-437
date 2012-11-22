@@ -7654,7 +7654,7 @@ class nusoap_client extends nusoap_base  {
 			$this->setError('Response not of type text/xml (no content-type header)');
 			return false;
     	}
-		if (!strstr($headers['content-type'], 'text/xml')) {
+		if (!strstr($headers['content-type'], 'text/xml') && !strstr($headers['content-type'], 'application/soap+xml')) {
 			$this->setError('Response not of type text/xml: ' . $headers['content-type']);
 			return false;
 		}
