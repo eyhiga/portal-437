@@ -42,9 +42,6 @@ if(isset($_POST["confirmarEndereco"])){
 	
 	$frete = $client->call("calculaFreteEPrazo", $params);
 
-	var_dump($frete);
-	exit;
-	
 	$frete = explode("|", $frete);
 	$frete[0]["valor"] = $frete[1];
 	$frete[0]["prazo"] = $frete[0];
