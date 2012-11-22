@@ -40,7 +40,7 @@ require_once "header.php";
 		<br/><b>Peso:</b> <?php echo $descricao["return"]["peso"] ?>
 		<br/><b>Largura:</b> <?php echo $descricao["return"]["largura"] ?>
 		<br/><b>Preço:</b> R$<?php echo number_format($preco->product->price, 2, ',', '') ?>
-		<br/><b>Dissponível no Estoque:</b> <?php echo $disp->product->quantity ?>
+		<br/><b>Disponível no Estoque:</b> <?php echo $disp->product->quantity ?>
 	</div>
 	<?php 
 	$volume = $descricao["return"]["altura"] * $descricao["return"]["largura"] * $descricao["return"]["comprimento"];
