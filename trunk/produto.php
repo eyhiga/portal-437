@@ -39,15 +39,19 @@ require_once "header.php";
 		<br/><b>Fabricante:</b> <?php echo utf8_encode($descricao["return"]["fabricante"]) ?>
 		<br/><b>Peso:</b> <?php echo $descricao["return"]["peso"] ?>
 		<br/><b>Largura:</b> <?php echo $descricao["return"]["largura"] ?>
-		<br/><b>Preço:</b> <?php echo $preco->product->price ?>
+		<br/><b>Preço:</b> R$<?php echo number_format($preco->product->price, 2, ',', '') ?>
 		<br/><b>Qtde Estoque:</b> <?php echo $disp->product->quantity ?>
 	</div>
-	
+	<?php 
+	$volume = $descricao["return"]["altura"] * $descricao["return"]["largura"] * $descricao["return"]["comprimento"];
+	?>
 	<img id="imagem" src="<?php echo $descricao["return"]["imagem"] ?>" />
 	<form action="adicionar_ao_carrinho.php" method="post">
 		<input type="hidden" name="nome" value="<?php echo utf8_encode($descricao["return"]["nome"]) ?>" />
 		<input type="hidden" name="id" value="<?php echo $idProduto ?>" />
-		<input type="hidden" name="preco" value="<?php echo $preco ?>" />
+		<input type="hidden" name="preco" value="<?php echo $preco->product->price ?>" />
+		<input type="hidden" name="peso" value="<?php echo $descricao["return"]["peso"] ?>" />
+		<input type="hidden" name="volume" value="<?php echo $volume ?>" />
 		<input type="submit" id="btnAddCarrinho" value="Adicionar ao carrinho" />
 	</form>
 	
