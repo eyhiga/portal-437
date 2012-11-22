@@ -31,7 +31,7 @@ require_once "header.php";
 	<div style="float:left;width:40%">
 		<br/><b>Nome:</b> <?php echo utf8_decode($descricao["return"]["nome"]) ?>
 		<br/><b>Categoria:</b> <?php echo utf8_decode($descricao["return"]["categoria"]) ?>
-		<br/><b>Descrição:</b> <?php echo utf8_decode($descricao["return"]["descricao"]) ?>
+		<br/><b>Descrição:</b> <?php echo utf8_encode($descricao["return"]["descricao"]) ?>
 		<br/><b>Comprimento:</b> <?php echo $descricao["return"]["comprimento"] ?>
 		<br/><b>Altura:</b> <?php echo $descricao["return"]["altura"] ?>
 		<br/><b>Fabricante:</b> <?php echo utf8_decode($descricao["return"]["fabricante"]) ?>
