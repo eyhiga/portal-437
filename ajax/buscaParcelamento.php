@@ -29,7 +29,6 @@ $result = json_decode($client->call("getInstallments", $params));
 
 $mensagem["retorno"] = "<select name='parcelamento' id='parcelamento'>";
 foreach ($result as $dado) {
-    if()
 	$mensagem["retorno"] .= "<option value='".$dado->installments."|".$dado->value."'>".$dado->installments." x R$".$dado->value."</option>";
 }
 $mensagem["retorno"] .= "</select>";
