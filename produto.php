@@ -27,10 +27,19 @@ require_once "header.php";
 ?>
 <div style="float:left">
 	<div style="float:left;width:40%">
-		<?php echo $produto->descricao; ?>
+		<br/>Nome: <?php echo $descricao["return"]["nome"] ?>
+		<br/>Categoria: <?php echo $descricao["return"]["categoria"] ?>
+		<br/>Descrição: <?php echo $descricao["return"]["descricao"] ?>
+		<br/>Comprimento: <?php echo $descricao["return"]["comprimento"] ?>
+		<br/>Altura: <?php echo $descricao["return"]["altura"] ?>
+		<br/>Fabricante: <?php echo $descricao["return"]["fabricante"] ?>
+		<br/>Peso: <?php echo $descricao["return"]["peso"] ?>
+		<br/>Largura: <?php echo $descricao["return"]["largura"] ?>
+		<br/>Preço: <?php echo 0 ?>
+		<br/>Qtde Estoque: <?php echo 0 ?>
 	</div>
 	
-	<img id="imagem" src="<?php echo $produto->imagem; ?>" />
+	<img id="imagem" src="<?php echo $descricao["return"]["imagem"] ?>" />
 	
 </div>	
 
