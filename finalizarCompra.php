@@ -33,7 +33,6 @@ if(isset($_POST["confirmarEndereco"])){
                             "volume" => "2.3"
 			         		)
                       );
-	$cepEntrega = "13087500";
 	
 	$frete = array();
 	
