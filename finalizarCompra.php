@@ -214,11 +214,11 @@ if(isset($_POST["confirmarEndereco"])){
 		
 		// Houve falha no pagamento
 		if($result->success == 1) {
-			echo "Sua compra foi realizada com sucesso";
 			$transaction_id = $result->transaction_id;
 		// Deu tudo certo no pagamento
 		} else {
 			echo "Você não pode efetuar esta compra por razões de crédito";
+			exit;
 		}
 	}
 	
@@ -256,6 +256,11 @@ if(isset($_POST["confirmarEndereco"])){
 		->body($attr08UpdJSON)
 		->send();
 	}
+	
+	echo "Sua compra foi realizada com sucesso";
+	?>
+	<img src="images/ok.gif" />
+	<?php 
 	
 
 /* 1º passo - Escolha de endereço de entrega */
