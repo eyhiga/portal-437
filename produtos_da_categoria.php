@@ -37,9 +37,6 @@ $produtos = $client->call("getListProdutoByFilter", $params);
                     ?>
                     <div>R$ <?php echo $preco->product->price;?></div>
                     <div>Disponiveis: <?php echo $disp->product->quantity;?> </div>
-                    <?php if($disp->product->quantity > 0) {?>
-					<div><a href="adicionar_ao_carrinho.php?prodID=<?php echo $produto["codigo"]; ?>">adicionar ao carrinho</a></div>
-                    <?php }?>
 					<!--<div class="pdt_preco">Preco R$: <?php //echo $produto->preco; ?></div>-->
 				</div>
 			</div>
