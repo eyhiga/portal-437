@@ -105,7 +105,7 @@ class PageViews {
 				if(($key % 2) == 0) $class = "odd"; 
                 $key = $key + 1;
 				?>
-				<li class="<?php echo $class ?>"><a href="produtos_da_categoria.php?categID=<?php echo $categoria["nome"]; ?>"><?php echo utf8_encode($categoria["nome"]); ?></a></li>
+				<li class="<?php echo $class ?>"><a href="produtos_da_categoria.php?categID=<?php echo utf8_encode($categoria["nome"]); ?>"><?php echo utf8_encode($categoria["nome"]); ?></a></li>
 			<?php } ?>
 			</ul>
 		</div>

@@ -15,6 +15,9 @@ if (!(isset($_POST["bandeira"]))){
 	exit();
 }
 
+$usuario = unserialize($_SESSION["usuario"]);
+$score = $usuario->score;
+
 $bandeira = trim($_POST["bandeira"]);
 $valorTotal = $_SESSION["valorTotal"];
 
@@ -26,6 +29,7 @@ $result = json_decode($client->call("getInstallments", $params));
 
 $mensagem["retorno"] = "<select name='parcelamento' id='parcelamento'>";
 foreach ($result as $dado) {
+    if()
 	$mensagem["retorno"] .= "<option value='".$dado->installments."|".$dado->value."'>".$dado->installments." x R$".$dado->value."</option>";
 }
 $mensagem["retorno"] .= "</select>";
