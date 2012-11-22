@@ -160,6 +160,9 @@ if(isset($_POST["confirmarEndereco"])){
 		<br/>Valor: R$<?php echo $boleto["valor"]; ?>
 		<br/>Vencimento: R$<?php echo $boleto["data_vencimento"]; ?>
 		<br/>Data de Criação: R$<?php echo $boleto["data_criacao"]; ?>
+		<form action="" method="post">
+			<input type="submit" name="terminoPagamento" id="terminoPagamento" value="Finalizar" /
+		</form>
 		<?php 
 		$_SESSION["id_boleto"] = $boleto["id"];
 	}
@@ -168,35 +171,37 @@ if(isset($_POST["confirmarEndereco"])){
 /* 5º passo - Efetuar Transação do cartão/boleto, e Verificar se cliente é bom pagador, se tem produto no estoque, dar baixa no estoque e cadastrar entrega */	
 } elseif (isset($_POST["terminoPagamento"])) {
 	
-	$numeroCartao = $_POST["numeroCartao"];
-	$nomeTitular = $_POST["nomeTitular"];
-	$cpfTitular = $_POST["cpfTitular"];
-	$codigoSeguranca = $_POST["codigoSeguranca"];
-	$dataValidade = $_POST["dataValidade"];
-	$bandeira = $_POST["bandeira"];
-	$parcelamento = $_POST["parcelamento"];
-	$parcelas = explode("|", $parcelamento);
-	
-	$client = new nusoap_client($comp07, true);
-	$params = array("token" => 6, 
-			"value" => $_SESSION["valorTotal"],
-			"brand" => $bandeira,
-			"number" => $numeroCartao,
-			"name" => $nomeTitular,
-			"cpf" => $cpfTitular,
-			"code" => $codigoSeguranca,
-			"date" => $dataValidade,
-			"installments" => $parcelas[0],
-			);
-	$result = json_decode($client->call("doTransaction", $params));
-	
-	// Houve falha no pagamento
-	if($result->success == 1) {
-		echo "Sua compra foi realizada com sucesso";
-		$transaction_id = $result->transaction_id;
-	// Deu tudo certo no pagamento
-	} else {
-		echo "Você não pode efetuar esta compra por razões de crédito";
+	if(isset($_POST["numeroCartao"])){
+		$numeroCartao = $_POST["numeroCartao"];
+		$nomeTitular = $_POST["nomeTitular"];
+		$cpfTitular = $_POST["cpfTitular"];
+		$codigoSeguranca = $_POST["codigoSeguranca"];
+		$dataValidade = $_POST["dataValidade"];
+		$bandeira = $_POST["bandeira"];
+		$parcelamento = $_POST["parcelamento"];
+		$parcelas = explode("|", $parcelamento);
+		
+		$client = new nusoap_client($comp07, true);
+		$params = array("token" => 6, 
+				"value" => $_SESSION["valorTotal"],
+				"brand" => $bandeira,
+				"number" => $numeroCartao,
+				"name" => $nomeTitular,
+				"cpf" => $cpfTitular,
+				"code" => $codigoSeguranca,
+				"date" => $dataValidade,
+				"installments" => $parcelas[0],
+				);
+		$result = json_decode($client->call("doTransaction", $params));
+		
+		// Houve falha no pagamento
+		if($result->success == 1) {
+			echo "Sua compra foi realizada com sucesso";
+			$transaction_id = $result->transaction_id;
+		// Deu tudo certo no pagamento
+		} else {
+			echo "Você não pode efetuar esta compra por razões de crédito";
+		}
 	}
 	exit;
 		
