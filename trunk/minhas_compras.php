@@ -6,7 +6,7 @@ require_once "links.php";
 require_once "lib/nusoap.php";
 
 $id_compra = $_SESSION["id_entrega_cadastrada"];
-$id_compra = 320;
+//$id_compra = 320;
 
 $compra_client = new nusoap_client($comp09, true);
 
