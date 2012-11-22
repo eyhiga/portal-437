@@ -25,15 +25,32 @@ if(isset($_POST["confirmarEndereco"])){
 	$result = $client->call("UC003", $params); */
 	
 	// Busca o valor do frete e prazo de entrega de cada tipo de transportadora
-	/* $client = new nusoap_client($comp09, true);
-	$params = array("cep remetente" => $cepRemetente, "cep destinatario" => $cepEntrega, "id transportadora" => 1, "produtos" => $produtos);
-	$frete = $client->call("UC001", $params); 
+	$produtos = array(
+			         "1" => array(
+                           	"id_produto" => "10", 
+                            "quantidade" => "1",
+                            "peso" => "1.9",
+                            "volume" => "2.3"
+			         		)
+                      );
+	$cepEntrega = 13087500;
+	
+	$client = new nusoap_client($comp09, true);
+	
+	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 1, "produtos" => $produtos);
+	var_dump($params);
+	
+	$frete = $client->call("calculaFreteEPrazo", $params);
+
+	var_dump($frete);
+	exit;
+	
 	$frete = explode("|", $frete);
 	$frete[0]["valor"] = $frete[1];
-	$frete[0]["prazo"] = $frete[0];*/
+	$frete[0]["prazo"] = $frete[0];
 	
-	$frete[0]["valor"] = "9,50";
-	$frete[0]["prazo"] = "4";
+	/* $frete[0]["valor"] = "9,50";
+	$frete[0]["prazo"] = "4"; */
 	$frete[1]["valor"] = "7,00";
 	$frete[1]["prazo"] = "3";
 	$frete[2]["valor"] = "5,25";

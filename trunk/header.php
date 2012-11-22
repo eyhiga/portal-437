@@ -4,7 +4,7 @@
 ini_set("display_errors", 1);
 error_reporting(E_ERROR);
 
-$cepRemetente = "30330240";
+$cepRemetente = 30330240;
 
 //Incluindo arquivos
 date_default_timezone_set('America/Sao_Paulo');
