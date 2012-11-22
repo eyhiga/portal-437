@@ -222,7 +222,6 @@ if(isset($_POST["confirmarEndereco"])){
 	}
 	
 	// Cadastro de entrega
-	// TODO
 	$link09 = $comp09;
 	$produtosServico = array();
 	foreach($_SESSION['carrinho_lista'] as $index => $item) {
@@ -250,6 +249,7 @@ if(isset($_POST["confirmarEndereco"])){
 	foreach($_SESSION['carrinho_lista'] as $index => $item) {
 		$attr08Upd = array("code" => $item["id"],
 			"quantity" => $item["qtd"]);
+		var_dump($attr08Upd);
 		$attr08UpdJSON = json_encode($attr08Upd);
 		$response = \Httpful\Request::put($link08Upd)
 		->sendsJson()
