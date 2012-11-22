@@ -1,3 +1,5 @@
+<?php require_once "lib/nusoap.php"; ?>
+<?php require_once "links.php" ?>
 <?php 
 class Produto
 {
@@ -13,7 +15,7 @@ class Produto
 	public $peso;
 	
 	function __construct() {
-       
+		ini_set('display_errors', 1);
 	}
 	
 	static function getClient() 
@@ -21,12 +23,11 @@ class Produto
 		$client = null;
 		try
 		{
-			//$client = new SoapClient ("http://staff01.lab.ic.unicamp.br:8080/ProdUNICAMPServices/services/Servicos?wsdl");
+			$client = new nusoap_client ($comp05,true);
 		}catch(Exception $e)
 		{ 
             echo "<h2>Exception Error!</h2>"; 
             echo $e->getMessage(); 
-			
         } 
 		
 		return $client;
@@ -43,9 +44,10 @@ class Produto
 	
     public static function getCategories()
     {
-		//$soap = Produto::getClient();
-	  //return $soap->GetListCategoria();
-	  return array(12 => "eletrodomesticos", 32 => "eletronicos");
+		$soap = Produto::getClient();
+
+	  return $soap->call('getListCategoria');
+	  //return array(12 => "eletrodomesticos", 32 => "eletronicos");
     }
 	
 	public static function getListProdutoByFilter($nome,$categoria,$fabricante,$pesoMin,$pesoMax)
