@@ -170,7 +170,7 @@ if(isset($_POST["confirmarEndereco"])){
 		<br/>Vencimento: R$<?php echo $boleto["data_vencimento"]; ?>
 		<br/>Data de Criação: R$<?php echo $boleto["data_criacao"]; ?>
 		<form action="" method="post">
-			<input type="submit" name="terminoPagamento" id="terminoPagamento" value="Finalizar" /
+			<input type="submit" name="terminoPagamento" id="terminoPagamento" value="Finalizar" />
 		</form>
 		<?php 
 		$_SESSION["id_boleto"] = $boleto["id"];
