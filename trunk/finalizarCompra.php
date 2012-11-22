@@ -35,27 +35,41 @@ if(isset($_POST["confirmarEndereco"])){
                       );
 	$cepEntrega = "13087500";
 	
+	$frete = array();
+	
+	// Transporte 1
 	$client = new nusoap_client($comp09, true);
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 1, "produtos" => $produtos);
-	$frete = $client->call("calculaFreteEPrazo", $params);
-	var_dump($frete);
-	$frete[0]["valor"] = $frete["frete"];
-	$frete[0]["prazo"] = $frete["prazo"];
-	sleep(1);
-	
+	$freteService = $client->call("calculaFreteEPrazo", $params);
+	echo "<br/>transporte 1: ";
+	var_dump($freteService);
+	$frete[0]["valor"] = $freteService["frete"];
+	$frete[0]["prazo"] = $freteService["prazo"];
+
+	// Transporte 2
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 2, "produtos" => $produtos);
 	$frete = $client->call("calculaFreteEPrazo", $params);
-	var_dump($frete);
-	$frete[1]["valor"] = $frete["frete"];
-	$frete[1]["prazo"] = $frete["prazo"];
-	sleep(1);
+	echo "<br/>transporte 2: ";
+	var_dump($freteService);
+	$frete[1]["valor"] = $freteService["frete"];
+	$frete[1]["prazo"] = $freteService["prazo"];
 	
+	// Transporte 3
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 3, "produtos" => $produtos);
 	$frete = $client->call("calculaFreteEPrazo", $params);
-	var_dump($frete);
-	$frete[2]["valor"] = $frete["frete"];
-	$frete[2]["prazo"] = $frete["prazo"];
-	sleep(1);
+	echo "<br/>transporte 3: ";
+	var_dump($freteService);
+	$frete[2]["valor"] = $freteService["frete"];
+	$frete[2]["prazo"] = $freteService["prazo"];
+	
+	// Transporte 4
+	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 4, "produtos" => $produtos);
+	$frete = $client->call("calculaFreteEPrazo", $params);
+	echo "<br/>transporte 4: ";
+	var_dump($freteService);
+	$frete[3]["valor"] = $freteService["frete"];
+	$frete[3]["prazo"] = $freteService["prazo"];
+
 	
 	/* $frete[0]["valor"] = "9,50";
 	$frete[0]["prazo"] = "4";
