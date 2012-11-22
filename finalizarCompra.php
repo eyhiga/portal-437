@@ -39,12 +39,13 @@ if(isset($_POST["confirmarEndereco"])){
 	
 	// Transporte 1
 	$client = new nusoap_client($comp09, true);
-	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 2, "produtos" => $produtos);
+	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 1, "produtos" => $produtos);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
 	echo "<br/>transporte 1: ";
 	var_dump($freteService);
 	$frete[0]["valor"] = $freteService["frete"];
 	$frete[0]["prazo"] = $freteService["prazo"];
+	sleep(5);
 
 	// Transporte 2
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 2, "produtos" => $produtos);
@@ -53,6 +54,7 @@ if(isset($_POST["confirmarEndereco"])){
 	var_dump($freteService);
 	$frete[1]["valor"] = $freteService["frete"];
 	$frete[1]["prazo"] = $freteService["prazo"];
+	sleep(5);
 	
 	// Transporte 3
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 3, "produtos" => $produtos);
