@@ -212,56 +212,43 @@ if(isset($_POST["confirmarEndereco"])){
 			echo "Você não pode efetuar esta compra por razões de crédito";
 		}
 	}
-	exit;
-		
-	?>
 	
-	Eduardo - Verificar se tem produto no estoque (Grupo 08);<br/>
+	// Cadastro de entrega
+	$link09 = $comp09;
+	$params09 = array("id_portal" => "06",
+			"cep_destinatario" => $_SESSION["cepEntrega"],
+			"cep_remetente" => $cepRemetente,
+			"id_transportadora" => $_SESSION["tipoFrete"],
+			"produtos" => array(
+					"01" => array(
+							"id_produto" => "10",
+							"quantidade" => "1",
+							"peso" => "1",
+							"volume" => "1")
+			)
+	);
 	
-	<?php
-	    $link8Qtd = $comp08Qtd."10".".json";
-	    $ret8Qtd = file_get_contents($link8Qtd);
-	    $qts8 = json_decode($ret8);
-	    //echo $qts8->product->quantity;
-	    echo "<br/>";
-	?>
+	$client9 = new nusoap_client($link09);
+	$client9_resp = $client9->call("cadastrarEntrega", $params09);
+	$_SESSION["id_entrega_cadastrada"] = $client9_resp;
 	
-	Eduardo - Dar baixa no estoque (Grupo 08)
-	
-	<?php
-	
-	    $link08Upd = $comp08Upd;
-	    $attr08Upd = array("code" => "1010",
-	                       "quantity" => "28");
-        $attr08UpdJSON = json_encode($attr08Upd);
-        $response = \Httpful\Request::put($link08Upd)
-                    ->sendsJson()
-                    ->body($js)
-                    ->send();
-	
-	?>
-	<br/>
-	cadastrar entrega (Grupo 09).<br/><br/><br/>
-	
-	<?php
-	
-    $link09 = $comp09;    
-    $params09 = array("id_portal" => "06",
-                      "cep_destinatario" => "13083755",
-                      "cep_remetente" => "13083755",
-                      "id_transportadora" => "1",
-                      "produtos" => array(
-                                    "01" => array(
-                                                "id_produto" => "10", 
-                                                "quantidade" => "1",
-                                                "peso" => "1",
-                                                "volume" => "1")
-                      )
-   ); 
 
-   $client9 = new nusoap_client($link09); 
-   $client9_resp = $client9->call("cadastrarEntrega", $params09); 
-   $_SESSION["id_entrega_cadastrada"] = $client9_resp;
+	// Baixa no estoque
+	$link08Upd = $comp08Upd;
+	$attr08Upd = array("code" => "1010",
+			"quantity" => "28");
+	$attr08UpdJSON = json_encode($attr08Upd);
+	$response = \Httpful\Request::put($link08Upd)
+	->sendsJson()
+	->body($js)
+	->send();
+
+	// Verificar se tem produto no estoque
+    /* $link8Qtd = $comp08Qtd."10".".json";
+    $ret8Qtd = file_get_contents($link8Qtd);
+    $qts8 = json_decode($ret8);
+    //echo $qts8->product->quantity; */
+	
    
 /* 1º passo - Escolha de endereço de entrega */
 } else {
