@@ -1,8 +1,10 @@
 <?php
+ini_set("display_errors", 1);
 $_GET["page"] = "Abrir chamado";
 require_once "header.php";
-require_once "lib/nusoap.php"
+require_once "lib/nusoap.php";
 
+$usuario = unserialize($_SESSION["usuario"]);
 ?>
 
 <form name="formCriarTicket" action="" method="post">
@@ -26,7 +28,7 @@ require_once "lib/nusoap.php"
 <?php
 
 if(isset($_POST["criarTicket"])) {
-    $cpf = $_POST["cpf"];
+    $cpf = $usuario->cpf;
     $grupo = "06";
     $texto = $_POST["texto"];
     $tipoChamado = $_POST["tipoChamado"];
