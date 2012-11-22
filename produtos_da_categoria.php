@@ -35,7 +35,7 @@ $produtos = $client->call("getListProdutoByFilter", $params);
                         $client_disp = file_get_contents($comp08Qtd.$produto["codigo"].".json");
                         $disp = json_decode($client_disp);
                     ?>
-                    <div>R$ <?php echo $preco->product->price;?></div>
+                    <div>R$ <?php echo number_format($preco->product->price, 2, ',', '') ?></div>
                     <div>Disponiveis: <?php echo $disp->product->quantity;?> </div>
 					<!--<div class="pdt_preco">Preco R$: <?php //echo $produto->preco; ?></div>-->
 				</div>
