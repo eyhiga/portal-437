@@ -246,8 +246,8 @@ if(isset($_POST["confirmarEndereco"])){
    ); 
 
    $client9 = new nusoap_client($link09); 
-   //$client9_resp = $client9->call("cadastrarEntrega", $params09); 
-   //print_r($client9_resp);
+   $client9_resp = $client9->call("cadastrarEntrega", $params09); 
+   $_SESSION["id_entrega_cadastrada"] = $client9_resp;
    
 /* 1º passo - Escolha de endereço de entrega */
 } else {
@@ -327,7 +327,7 @@ function buscarCep(){
     );
 }
 
-$("#bandeira").change(function(){
+$("#bandeira").click(function(){
 	var bandeira = $("#bandeira").val();
 	$.post("ajax/buscaParcelamento.php", 
     {
