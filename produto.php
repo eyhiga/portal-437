@@ -29,12 +29,12 @@ require_once "header.php";
 ?>
 <div style="float:left">
 	<div style="float:left;width:40%">
-		<br/><b>Nome:</b> <?php echo utf8_decode($descricao["return"]["nome"]) ?>
-		<br/><b>Categoria:</b> <?php echo utf8_decode($descricao["return"]["categoria"]) ?>
+		<br/><b>Nome:</b> <?php echo utf8_encode($descricao["return"]["nome"]) ?>
+		<br/><b>Categoria:</b> <?php echo utf8_encode($descricao["return"]["categoria"]) ?>
 		<br/><b>Descrição:</b> <?php echo utf8_encode($descricao["return"]["descricao"]) ?>
 		<br/><b>Comprimento:</b> <?php echo $descricao["return"]["comprimento"] ?>
 		<br/><b>Altura:</b> <?php echo $descricao["return"]["altura"] ?>
-		<br/><b>Fabricante:</b> <?php echo utf8_decode($descricao["return"]["fabricante"]) ?>
+		<br/><b>Fabricante:</b> <?php echo utf8_encode($descricao["return"]["fabricante"]) ?>
 		<br/><b>Peso:</b> <?php echo $descricao["return"]["peso"] ?>
 		<br/><b>Largura:</b> <?php echo $descricao["return"]["largura"] ?>
 		<br/><b>Preço:</b> <?php echo 0 ?>
