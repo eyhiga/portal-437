@@ -11,6 +11,10 @@ require_once 'lib/nusoap.php';
 if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
 	$login = $_POST['formLoginLogin'];
 	$senha = $_POST['formLoginSenha'];
+
+    //41587613107
+    //47145639203
+    //47926964883
 	
 	/*
 	 * Chamar servico de autenticacao para verificar se dados de login estao corretos
@@ -59,7 +63,7 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
         $client4_resp = $client4->call("getScore", $args4);
         $score = $client4_resp["return"]["score"]; 
         $usuario->score = $score;
-
+        //print_r($usuario);
             //$usuario->cpf = "";
             //$usuario->nome = "Teste Nome";
             //$usuario->cep = "13083852";
@@ -71,7 +75,7 @@ if (isset($_POST['formLoginLogin']) && isset($_POST['formLoginSenha'])) {
             //$usuario->numero = "350";
 
 
-            $_SESSION["usuario"] = serialize($usuario);
+        $_SESSION["usuario"] = serialize($usuario);
         $url = $_SESSION["redirecionarPagina"];
     } else {
         $url = 'login.php?err=1';
