@@ -68,7 +68,7 @@ class PageViews {
 			<ul class="menu">
 				<li><a href="index.php" class="nav1"> Home </a></li>
 				<li class="divider"></li>
-				<li><a href="produtos.php" class="nav2">Produtos</a></li>
+				<li><a href="minhas_compras.php" class="nav2">Minhas compras</a></li>
 				<li class="divider"></li>
 				<li><a href="categorias.php" class="nav3">Categorias</a></li>
 				<li class="divider"></li>
