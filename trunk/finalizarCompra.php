@@ -41,47 +41,27 @@ if(isset($_POST["confirmarEndereco"])){
 	$client = new nusoap_client($comp09, true);
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 1, "produtos" => $produtos);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
-	echo "<br/>transporte 1: ";
-	var_dump($freteService);
 	$frete[0]["valor"] = $freteService["frete"];
 	$frete[0]["prazo"] = $freteService["prazo"];
 
 	// Transporte 2
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 2, "produtos" => $produtos);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
-	echo "<br/>transporte 2: ";
-	var_dump($freteService);
 	$frete[1]["valor"] = $freteService["frete"];
 	$frete[1]["prazo"] = $freteService["prazo"];
-	sleep(5);
 	
 	// Transporte 3
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 3, "produtos" => $produtos);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
-	echo "<br/>transporte 3: ";
-	var_dump($freteService);
 	$frete[2]["valor"] = $freteService["frete"];
 	$frete[2]["prazo"] = $freteService["prazo"];
 	
 	// Transporte 4
 	$params = array("cep_remetente" => $cepRemetente, "cep_destinatario" => $cepEntrega, "id_transportadora" => 4, "produtos" => $produtos);
 	$freteService = $client->call("calculaFreteEPrazo", $params);
-	echo "<br/>transporte 4: ";
-	var_dump($freteService);
 	$frete[3]["valor"] = $freteService["frete"];
 	$frete[3]["prazo"] = $freteService["prazo"];
 
-	
-	/* $frete[0]["valor"] = "9,50";
-	$frete[0]["prazo"] = "4";
-	$frete[1]["valor"] = "7,00";
-	$frete[1]["prazo"] = "3";
-	$frete[2]["valor"] = "5,25";
-	$frete[2]["prazo"] = "7"; 
-	$frete[3]["valor"] = "12,00";
-	$frete[3]["prazo"] = "1";*/
-	
-	
 	$result = array();
 	$result[0]["nome"] = "Sedex";
 	$result[0]["id"] = 1;
@@ -97,7 +77,7 @@ if(isset($_POST["confirmarEndereco"])){
 	<form name="formEscolhaFrete" action="" method="post">
 		<?php
 		foreach ($result as $key => $transportadora) {
-			?><input type="radio" name="tipoFrete" id="tipoFrete" value="<?php echo $transportadora["id"]?>" checked /><?php echo $transportadora["nome"] ?> -- Valor: R$<?php echo $frete[$key]["valor"] ?> -- Prazo de entrega: <?php echo $frete[$key]["prazo"] ?> dias <br/>
+			?><input type="radio" name="tipoFrete" id="tipoFrete" value="<?php echo $transportadora["id"]?>" checked /><?php echo $transportadora["nome"] ?> -- Valor: R$<?php echo number_format($frete[$key]["valor"], 2, ',', ''); ?> -- Prazo de entrega: <?php echo $frete[$key]["prazo"] ?> dias <br/>
 			<input type="hidden" name="valorFrete" value="<?php echo $frete[$key]["valor"] ?>" />
 			<input type="hidden" name="prazoFrete" value="<?php echo $frete[$key]["prazo"] ?>" /> 	
 			<input type="hidden" name="nomeFrete" value="<?php echo $transportadora["nome"] ?>" />
