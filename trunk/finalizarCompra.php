@@ -99,10 +99,19 @@ if(isset($_POST["confirmarEndereco"])){
 	$_SESSION["valorCarrinho"] = 300;
 	
 	$_SESSION["valorTotal"] = $_SESSION["valorCarrinho"] + $_SESSION["valorFrete"];
+	
+	$cartao = TRUE;
+	if($usuario->score == "A" && $_SESSION["valorTotal"] > 30000) $cartao = FALSE;
+	if($usuario->score == "B" && $_SESSION["valorTotal"] > 15000) $cartao = FALSE;
+	if($usuario->score == "C" && $_SESSION["valorTotal"] > 10000) $cartao = FALSE;
+	if($usuario->score == "D" && $_SESSION["valorTotal"] > 5000) $cartao = FALSE;
+	if($usuario->score == "X") $cartao = FALSE;
+	
+	
 	?>
 	<b>Escolha o meio de pagamento:</b>
 	<form name="formPagamento" action="" method="post">
-		<input type="radio" name="pagamento" value="1" checked /> Cartão de Crédito<br/>
+		<?php if($cartao) { ?><input type="radio" name="pagamento" value="1" checked /> Cartão de Crédito<br/><?php } ?>
 		<input type="radio" name="pagamento" value="2" /> Boleto Bancário<br/><br/>
 		
 		<input type="submit" name="confirmarPagamento" id="confirmarPagamento" value="Próximo Passo" />
@@ -205,17 +214,6 @@ if(isset($_POST["confirmarEndereco"])){
 	}
 	exit;
 		
-	
-	/* Eduardo - Verificar se cliente é bom pagador (Grupo 04);<br/> */
-	
-	$args4 = array("cpf" => "39764194869",
-			"token" => "0123456789");
-	
-	$client4 = new nusoap_client($comp04, true);
-	$client4_resp = $client4->call("getScore", $args4);
-	$score = $client4_resp["return"]["score"]; 
-	echo "Score:".$score."<br/>";
-	//print_r($score);
 	?>
 	
 	Eduardo - Verificar se tem produto no estoque (Grupo 08);<br/>
