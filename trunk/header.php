@@ -5,6 +5,8 @@ ini_set("display_errors", 1);
 error_reporting(E_ERROR);
 
 $cepRemetente = "30330240";
+$cnpj = "41.050.244/0001-66";
+$token = "bf51e510909448cff434044f3d68a1dc";
 
 //Incluindo arquivos
 date_default_timezone_set('America/Sao_Paulo');
