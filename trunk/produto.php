@@ -22,8 +22,6 @@ require_once "header.php";
 	$params = array("codigo" => $idProduto);
 	$descricao = $client->call("getProdutoByCodigo", $params);
 	
-	var_dump($descricao);
-	
 ?>
 <div style="float:left">
 	<div style="float:left;width:40%">
