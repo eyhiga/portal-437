@@ -7,6 +7,12 @@
 	// http://g2mc437.heliohost.org/parte2/service/teste-cep.php
 	$comp02 = "http://g2mc437.heliohost.org/parte2/service/webserver.php/g02_busca_por_cep?wsdl";
 	
+	// Boleto Bancário
+	// http://mc437-2012s2-banco-ws.pagodabox.com/docs/Grupo_03_Banco_Descricao_Servi%C3%A7o_Componente_V02.pdf
+	// http://mc437-2012s2-banco-ws.pagodabox.com/simulador/
+	// http://mc437-2012s2-banco-ws.pagodabox.com/ws/BancoApi
+	$comp03 = "http://mc437-2012s2-banco-ws.pagodabox.com/ws/BancoApi";
+	
 	// Retorna a situacao de credito
     $comp04 = "http://staff01.lab.ic.unicamp.br:8480/ModuloValidacaoCreditoWS/services/ValidacaoCreditoService?wsdl";
 	//$comp04 = "localhost:8480/ModuloValidacaoCreditoWS/services/ValidacaoCreditoService?wsdl";
