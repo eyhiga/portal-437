@@ -8,12 +8,13 @@ require_once "ruda.php";
 
 <?php
 	$carrinho = Carrinho::getCarrinho();
-	foreach($carrinho as $produto):
+	var_dump($carrinho);
+	/* foreach($carrinho as $produto):
 		echo $produto->nome;
-	endforeach;
+	endforeach; */
 ?>
 
-<a href="finalizarCompra.php"><input type="button" id="botaoFinalizarCompra" value="Finalizar Compra" /></a>
+<a href="finalizarCompra.php"><input type="button" id="botaoFinalizarCompra" value="Finalizar Compra"/></a>
 
 <?php 
 
