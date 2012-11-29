@@ -2,11 +2,9 @@
 
 $_GET["page"] = "Carrinho";
 require_once "header.php";
+echo "teste = ";
 require_once "ruda.php";
 
-?>
-
-<?php
 	$carrinho = Carrinho::getCarrinho();
 	var_dump($carrinho);
 	echo "teste = ".$carrinho;
