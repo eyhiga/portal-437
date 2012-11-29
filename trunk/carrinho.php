@@ -9,6 +9,7 @@ require_once "ruda.php";
 <?php
 	$carrinho = Carrinho::getCarrinho();
 	var_dump($carrinho);
+	echo "teste = ".$carrinho;
 	/* foreach($carrinho as $produto):
 		echo $produto->nome;
 	endforeach; */
